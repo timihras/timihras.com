@@ -1,28 +1,23 @@
 import React from 'react'
-import Slider from 'react-slick'
+// import Slider from 'react-slick'
+import { graphql } from 'gatsby'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
 import Img from 'gatsby-image'
 
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+// import 'slick-carousel/slick/slick.css'
+// import 'slick-carousel/slick/slick-theme.css'
 
 export default ({ data }) => (
   <article className="sheet">
-    <HelmetDatoCms seo={data.datoCmsWork.seoMetaTags} />
+    <HelmetDatoCms seo={data.datoCmsWork.childDatoCmsSeoMetaTags} />
     <div className="sheet__inner">
       <h1 className="sheet__title">{data.datoCmsWork.title}</h1>
       <p className="sheet__lead">{data.datoCmsWork.excerpt}</p>
-      <div className="sheet__slider">
-        <Slider infinite={true} slidesToShow={2} arrows>
-          {data.datoCmsWork.gallery.map(({ resize }) => (
-            <img key={resize.src} src={resize.src} />
-          ))}
-        </Slider>
-      </div>
       <div
         className="sheet__body"
         dangerouslySetInnerHTML={{
-          __html: data.datoCmsWork.descriptionNode.childMarkdownRemark.html,
+          __html:
+            data.datoCmsWork.childDatoCmsWorkDescriptionTextNode.childMarkdownRemark.html,
         }}
       />
       <div className="sheet__gallery">
@@ -35,17 +30,20 @@ export default ({ data }) => (
 export const query = graphql`
   query WorkQuery($slug: String!) {
     datoCmsWork(slug: { eq: $slug }) {
-      seoMetaTags {
-        ...GatsbyDatoCmsSeoMetaTags
+      childDatoCmsSeoMetaTags {
+        id
+        tags {
+          tagName
+          content
+        }
       }
       title
       excerpt
       gallery {
-        resize(height: 200, imgixParams: { fm: "jpg", auto: "compress" }) {
-          src
-        }
+        id
+        url
       }
-      descriptionNode {
+      childDatoCmsWorkDescriptionTextNode {
         childMarkdownRemark {
           html
         }
@@ -53,9 +51,13 @@ export const query = graphql`
       coverImage {
         url
         sizes(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
-          ...GatsbyDatoCmsSizes
+          base64
+          aspectRatio
+          src
+          srcSet
+          sizes
         }
       }
     }
-  }
+  }  
 `
