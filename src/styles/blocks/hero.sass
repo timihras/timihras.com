@@ -1,0 +1,45 @@
+.hero 
+  background: $bg-light
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  justify-content: flex-end
+  height: 100vh
+  overflow: hidden
+
+.hero__wrapper 
+  margin: $m*2
+  background-color: inherit
+  position: relative
+  
+  &::after 
+    background-color: inherit
+    content: " "
+    display: block
+    height: 4rem
+    left: -15%
+    overflow: hidden
+    position: absolute
+    bottom: -4rem
+    transform: rotate(5deg)
+    z-index: 0
+    width: 130%
+
+.hero__section 
+  padding-left: 0
+
+.hero__text 
+  white-space: pre-wrap
+
+.hero__bottom
+  background: white
+  padding: $xl 0 $m 0
+  display: flex
+
+.hero__sign 
+  margin-bottom: $l
+
+// @media only screen and (max-width: $tablet)
+
+// @media only screen and (max-width: $mobile)
+

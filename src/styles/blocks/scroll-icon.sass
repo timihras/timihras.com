@@ -1,0 +1,71 @@
+.mouse_scroll
+  display: block
+  margin: 0 auto
+  position: relative
+  width: 21px
+
+.scroll_arrows 
+  display: block
+  transform: rotate(45deg)
+  border-right: 2px solid $bg-dark
+  border-bottom: 2px solid $bg-dark
+  margin: 0 0 $s $s
+  width: $xs
+  height: $xs
+
+.unu 
+  margin-top: 1px
+
+.unu, .doi, .trei
+  animation: mouse-scroll 1s infinite
+
+.unu 
+  animation-delay: .1s
+  animation-direction: alternate
+
+.doi 
+  animation-delay: .2s
+  animation-direction: alternate
+  margin-top: -6px
+
+.trei 
+  animation-delay: .3s
+  animation-direction: alternate
+  margin-top: -6px
+
+.mouse 
+  height: $m*1.8
+  width: $m
+  border-radius: $s*1.1
+  border: 2px solid $bg-dark
+  margin-bottom: $s
+
+.wheel 
+  display: block
+  margin: 5px auto
+  background: $bg-dark
+  position: relative
+  height: $s/2
+  width: $s/2
+  border: 2px solid $bg-dark
+  border-radius: 50%
+
+
+.wheel
+  animation: mouse-wheel 3s linear infinite
+
+@keyframes mouse-wheel
+  0% 
+    opacity: 1
+    transform: translateY(0px)
+  100%
+    opacity: 0
+    transform: translateY(6px)
+
+@keyframes mouse-scroll 
+  0%
+    opacity: 0
+  50%
+    opacity: .5
+  100%
+    opacity: 1
